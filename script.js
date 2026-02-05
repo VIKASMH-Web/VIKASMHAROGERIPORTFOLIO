@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setupAnimation();
 
       // Force hide loader immediately to prevent getting stuck
-      loaderEl.style.display = "none";
+      loaderEl.style.display = "none"; // Immediate hide
     }
   };
 
