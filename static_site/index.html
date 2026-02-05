@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vikas M Harogeri | AI & Data Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: "#121212",
+              "surface-dark": "#1E1E1E",
+              secondary: "#A0A0A0",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #121212;
+        color: white;
+        overflow-x: hidden;
+      }
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1;
+        object-fit: cover;
+      }
+      .scroll-container {
+        height: 500vh; /* Determines length of scroll */
+        position: relative;
+        z-index: 2;
+      }
+      .overlay-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      .projects-section {
+        position: relative;
+        z-index: 20;
+        background-color: #121212;
+        min-height: 100vh;
+        padding: 4rem 1rem;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.5s ease;
+      }
+      .glass-card:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #121212;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: "Inter", sans-serif;
+        transition: opacity 0.5s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader -->
+    <div id="loader" class="loader">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold mb-2">Loading Experience</h2>
+        <div class="w-48 h-1 bg-gray-800 rounded overflow-hidden">
+          <div
+            id="progress-bar"
+            class="h-full bg-white w-0 transition-all duration-100"
+          ></div>
+        </div>
+        <p id="progress-text" class="text-sm text-gray-400 mt-2">0%</p>
+      </div>
+    </div>
+
+    <!-- Canvas Background -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Scroll Trigger Container -->
+    <div class="scroll-container"></div>
+
+    <!-- Live Overlay Texts (Controlled by GSAP) -->
+    <div class="overlay-text px-8 md:px-20 text-center" id="text-1">
+      <h1 class="text-5xl md:text-8xl font-bold tracking-tighter mb-4">
+        Vikas M Harogeri
+      </h1>
+      <p class="text-xl md:text-3xl font-light text-secondary">
+        CSE–AI Undergraduate <br class="md:hidden" /> AI & Data Analytics Enthusiast
+      </p>
+      <div class="mt-8 flex gap-4 justify-center pointer-events-auto">
+          <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all text-sm font-bold tracking-wide cursor-pointer z-50">
+              View Projects
+          </button>
+          <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white transition-all text-sm font-bold tracking-wide shadow-lg shadow-blue-500/20 cursor-pointer z-50">
+              Contact Me
+          </button>
+      </div>
+    </div>
+
+    <div class="overlay-text px-8 md:px-20 items-start md:pl-32" id="text-2">
+      <h2 class="text-4xl md:text-7xl font-bold leading-tight text-left">
+        Building <span class="text-secondary">Intelligent Systems.</span>
+      </h2>
+      <p class="mt-4 text-xl text-gray-400 max-w-xl text-left">
+        I am first-year CSE (AI) student passionate about solving real-world problems using AI, ML, and programming.
+      </p>
+    </div>
+
+    <div class="overlay-text px-8 md:px-20 items-end md:pr-32" id="text-3">
+      <h2 class="text-4xl md:text-7xl font-bold leading-tight text-right">
+        Tech + Creativity <br />
+        & <span class="text-secondary">Consistency.</span>
+      </h2>
+    </div>
+
+    <!-- Main Content Section (Previously Projects) -->
+    <section class="projects-section max-w-7xl mx-auto">
+      <div class="px-6 md:px-20">
+        
+        <!-- ABOUT SECTION -->
+        <div class="mb-20">
+          <h2 class="text-xs font-bold tracking-widest text-secondary uppercase mb-6">About Me</h2>
+          <div class="grid md:grid-cols-2 gap-12">
+             <h3 class="text-3xl font-bold leading-tight">
+                Motivated first-year CSE-AI student.
+             </h3>
+             <div class="text-gray-400 space-y-4">
+                <p>
+                    I am a first-year Computer Science and Engineering (Artificial Intelligence) student with a strong foundation in programming, data analysis, and problem-solving. Passionate about AI-driven solutions and eager to gain practical experience through internships, projects, and real-world applications in software development and data analytics.
+                </p>
+             </div>
+          </div>
+        </div>
+
+        <!-- CONTACT / CONNECT SECTION (Moved to Mid) -->
+        <div class="mb-20" id="contact">
+             <div class="glass-card p-8 rounded-2xl border-l-4 border-blue-500">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">Let's Connect</h2>
+                        <p class="text-gray-400 text-sm">Open to collaborations and AI research opportunities.</p>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-6 text-sm">
+                        <a href="mailto:bankadamanig@gmail.com" class="flex items-center space-x-2 text-white hover:text-blue-400 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <span>bankadamanig@gmail.com</span>
+                        </a>
+                        <a href="https://linkedin.com/in/vikas-m-harogeri-55a320241" target="_blank" class="flex items-center space-x-2 text-white hover:text-blue-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                        <div class="flex items-center space-x-2 text-gray-400">
+                             <span>+91 7019773187</span>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+        <!-- SKILLS SECTION -->
+        <div class="mb-20">
+            <h2 class="text-xs font-bold tracking-widest text-secondary uppercase mb-8">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-2xl">
+                    <h4 class="text-xl font-bold mb-4">Technical Skills</h4>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• Python (Basics → Intermediate)</li>
+                        <li>• C Programming</li>
+                        <li>• MATLAB</li>
+                        <li>• Data Structures (Lists, Tuples, Dictionaries, Sets)</li>
+                        <li>• Algorithms (Basic Concepts)</li>
+                        <li>• Data Analytics Fundamentals</li>
+                        <li>• Artificial Intelligence Fundamentals</li>
+                        <li>• Generative AI (Introductory)</li>
+                        <li class="pt-2 font-bold text-white">Tools</li>
+                        <li>• GitHub</li>
+                        <li>• Google Workspace</li>
+                        <li>• Overleaf</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <h4 class="text-xl font-bold mb-4">Core Strengths</h4>
+                    <ul class="text-gray-400 space-y-2">
+                         <li>• Strong Problem Solving</li>
+                         <li>• Logical Reasoning & Thinking</li>
+                         <li>• Mathematics for Computing</li>
+                         <li>• Continuous Learning</li>
+                         <li>• Team Collaboration</li>
+                         <li class="pt-4 font-bold text-white">Languages Known</li>
+                         <li>• English, Kannada, Hindi</li>
+                         <li class="pt-4 font-bold text-white">Areas of Interest</li>
+                         <li>• AI, ML, Data Analytics, Smart City Tech</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDUCATION & EXPERIENCE GRID -->
+        <div class="grid md:grid-cols-2 gap-16 mb-20">
+            <!-- EDUCATION -->
+            <div>
+                <h2 class="text-xs font-bold tracking-widest text-secondary uppercase mb-8">Education</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-xl font-bold">KLE Technological University, Hubballi</h4>
+                        <p class="text-gray-400 text-sm">B.E. in Computer Science & Engineering – Artificial Intelligence</p>
+                        <p class="text-secondary text-xs mt-1">2025 – 2029</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold">Excel PU College, Belthangady</h4>
+                        <p class="text-gray-400 text-sm">Pre-University Course – Science</p>
+                        <p class="text-secondary text-xs mt-1">2023 – 2025</p>
+                    </div>
+                </div>
+            </div>
+            <!-- EXPERIENCE -->
+            <div>
+                <h2 class="text-xs font-bold tracking-widest text-secondary uppercase mb-8">Experience</h2>
+                <div class="glass-card p-6 rounded-xl">
+                    <h4 class="text-xl font-bold">Creative Designer</h4>
+                    <p class="text-secondary text-sm mb-4">InAmigos Foundation (IAF) | Jan 2026 – Present</p>
+                    <ul class="text-gray-400 text-sm space-y-2 list-disc ml-4">
+                        <li>Spearheaded the design of creative digital content for social initiatives</li>
+                        <li>Orchestrated visual storytelling strategies with cross-functional teams</li>
+                        <li>Boosted audience engagement through consistent, high-quality design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS SECTION (Placeholder) -->
+        <div class="mb-20" id="projects">
+             <h2 class="text-4xl md:text-6xl font-bold mb-16 tracking-tight text-white/90">Projects</h2>
+              <div class="grid md:grid-cols-1 gap-6">
+                  <!-- SmartTicket Card -->
+                  <div class="glass-card p-8 rounded-2xl text-left border border-white/10">
+                      <span class="text-blue-500 text-xs font-bold tracking-widest uppercase mb-2 block">Flagship Project</span>
+                      <h3 class="text-2xl font-bold mb-3">SmartTicket – Paperless BRTS Ticketing System</h3>
+                      <p class="text-gray-400 mb-4 text-sm">
+                          SmartTicket is a paperless digital ticketing system designed for BRTS (Chigari), Hubballi–Dharwad. The system focuses on reducing large-scale paper consumption and improving passenger experience through QR-based digital ticket generation and validation.
+                          <br/><br/>
+                          <span class="text-white font-bold block">Winner of Best Project Award – Avinya Hemanth 2025</span>
+                      </p>
+                      <ul class="text-gray-400 text-sm list-disc ml-4 space-y-1 mb-6">
+                            <li>Emphasis on sustainability and paperless consumption</li>
+                            <li>Improves efficiency and commuter convenience</li>
+                            <li>Aligned with smart city transportation systems</li>
+                      </ul>
+                      <a href="https://eclectic-smakager-7c6343.netlify.app" target="_blank" class="inline-block px-5 py-2 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 text-blue-400 text-xs font-bold rounded-lg transition-colors pointer-events-auto">
+                            View SmartTicket Project
+                      </a>
+                  </div>
+                  <div class="glass-card p-8 rounded-2xl text-left border border-white/10">
+                      <span class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-2 block">Python Practice Projects</span>
+                      <h3 class="text-2xl font-bold mb-3">Beginner AI & Programming</h3>
+                      <ul class="text-gray-400 text-sm list-disc ml-4 space-y-2">
+                          <li>Developed multiple Python programs using lists, tuples, dictionaries, and sets</li>
+                          <li>Strengthened logical thinking and problem-solving through hands-on coding exercises</li>
+                      </ul>
+                  </div>
+              </div>
+        </div>
+
+        <!-- CERTIFICATIONS & AWARDS -->
+        <div class="mb-20">
+             <div class="grid md:grid-cols-2 gap-12">
+                 <div>
+                    <h2 class="text-xs font-bold tracking-widest text-secondary uppercase mb-6">Certifications</h2>
+                    <ul class="space-y-3">
+                        <li class="glass-card p-4 rounded-lg text-sm">Deloitte Australia – Data Analytics Job Simulation</li>
+                        <li class="glass-card p-4 rounded-lg text-sm">Artificial Intelligence Fundamentals</li>
+                        <li class="glass-card p-4 rounded-lg text-sm">Introduction to Generative AI – Google</li>
+                        <li class="glass-card p-4 rounded-lg text-sm">MATLAB Onramp</li>
+                        <li class="glass-card p-4 rounded-lg text-sm">Cloud Fundamentals (Nov 2025)</li>
+                    </ul>
+                 </div>
+                 <div>
+                    <h2 class="text-xs font-bold tracking-widest text-secondary uppercase mb-6">Achievements</h2>
+                    <div class="space-y-4">
+                        <div class="glass-card p-6 rounded-xl">
+                            <h4 class="font-bold">Budding Scientist Award</h4>
+                            <p class="text-gray-400 text-sm mt-1">Conferred by Vidhan Parishat Member for academic curiosity and innovation.</p>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+        </div>
+
+        <footer class="mt-32 border-t border-white/10 pt-10 text-center pb-10">
+           <p class="text-secondary text-sm opacity-50">&copy; 2026 Vikas M Harogeri. All rights reserved.</p>
+        </footer>
+      </div>
+    </section>
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
